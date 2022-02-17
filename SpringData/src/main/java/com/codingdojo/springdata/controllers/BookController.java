@@ -21,10 +21,11 @@ public class BookController {
 	    }
 
 	@RequestMapping("/books")
-	public List<Book> index() {
-		List<Book> list = bookService.allBooks();
-		return list;
-	}
+	 public String index(Model model) {
+        List<Book> books = bookService.allBooks();
+        model.addAttribute("books", books);
+        return "/books/index.jsp";
+    }
 
 	@RequestMapping(value = "/books", method = RequestMethod.POST)
 	public Book create(@RequestParam(value = "title") String title, @RequestParam(value = "description") String desc,
